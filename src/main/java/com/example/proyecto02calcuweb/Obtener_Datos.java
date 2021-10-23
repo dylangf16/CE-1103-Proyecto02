@@ -4,12 +4,12 @@ import java.io.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 
-@WebServlet(name = "Principal", value = "/principal")
-public class HelloServlet extends HttpServlet {
+@WebServlet(name = "Obtener", value = "/obtener")
+public class Obtener_Datos extends HttpServlet {
     private String message;
 
     public void init() {
-        message = "Hello World!";
+        message = "Datos Obtenidos!";
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -22,11 +22,10 @@ public class HelloServlet extends HttpServlet {
         out.println("</body></html>");
 
         // read form fields
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
+        String operacion = request.getParameter("operacion");
 
-        System.out.println("username1: " + username);
-        System.out.println("password1: " + password);
+        System.out.println("operación recibida: " + operacion);
+
 
         // do some processing here...
 
@@ -35,8 +34,7 @@ public class HelloServlet extends HttpServlet {
 
         // build HTML code
         String htmlRespone = "<html>";
-        htmlRespone += "<h2>Your username is: " + username + "<br/>";
-        htmlRespone += "Your password is: " + password + "</h2>";
+        htmlRespone += "<h2>Tu operación es: " + operacion + "<br/>";
         htmlRespone += "</html>";
 
         // return response
