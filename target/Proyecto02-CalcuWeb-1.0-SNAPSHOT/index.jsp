@@ -41,7 +41,6 @@
                     <h2 class="text-white-50 mx-auto mt-2 mb-5">Escriba los valores a calcular:.</h2>
                     <input type="text" name= "operacion" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
                     <input class="btn btn-primary" type="submit" value="Presiona para enviar!"/>
-                    <input type="submit" value="Login" />
                 </form>
             </div>
         </div>
