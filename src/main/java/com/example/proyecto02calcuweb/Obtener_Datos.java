@@ -1,5 +1,8 @@
 package com.example.proyecto02calcuweb;
 
+import Expression_Tree.ExpressionTree;
+import Expression_Tree.InfixToPosfix;
+
 import java.io.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
@@ -10,11 +13,16 @@ public class Obtener_Datos extends HttpServlet {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/html");
-
         // read form fields
         String operacion = request.getParameter("operacion");
 
+
+        String posfix = InfixToPosfix.main(operacion);
+        double resul = ExpressionTree.main(posfix);
+
         System.out.println("operación recibida: " + operacion);
+        System.out.println("posfix: " + posfix);
+        System.out.println("resultado de la operación: " + resul);
 
 
         // do some processing here...
@@ -61,7 +69,7 @@ public class Obtener_Datos extends HttpServlet {
                 "        <div class=\"d-flex justify-content-center\">\n" +
                 "            <div class=\"text-center\">\n" +
                 "                <h1 class=\"mx-auto my-0 text-uppercase\">Datos Obtenidos</h1>\n" +
-                "                <h2 class=\"text-white-50 mx-auto mt-2 mb-5\">Tu resultado es: " + operacion + ".</h2>\n" +
+                "                <h2 class=\"text-white-50 mx-auto mt-2 mb-5\">Tu resultado es: " + resul + ".</h2>\n" +
                 "                <form action=\"http://localhost:8080/Proyecto02_CalcuWeb_war_exploded/\">"+
                 "                   <input class=\"btn btn-primary\" type=\"submit\" value=\"Presiona para volver a realizar un cálculo!\"/>"+
                 "                </form>"+
