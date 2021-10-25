@@ -3,6 +3,7 @@ package Save;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -50,7 +51,7 @@ public class SaveProblem {
         }
     }
 
-    public static List<List<String>> readFile() throws FileNotFoundException, IOException {
+    public static List<List<String>> readFile() throws IOException {
         List<List<String>> records = new ArrayList<>();
         String[] values = null;
         try (BufferedReader br = new BufferedReader(new FileReader("Table.csv"))) {
@@ -60,7 +61,36 @@ public class SaveProblem {
                 values = line.split(COMMA_DELIMITER);
                 records.add(Arrays.asList(values));
             }
+        } catch (FileNotFoundException ex) {
+            generateCsvFile();
         }
         return records;
+    }
+
+    private static void generateCsvFile() {
+
+        FileWriter writer = null;
+
+        try {
+
+            writer = new FileWriter("Table");
+            writer.append("DATE:");
+            writer.append(',');
+            writer.append("PROBLEM:");
+            writer.append(',');
+            writer.append("RESULT:");
+
+            System.out.println("CSV file is created...");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                writer.flush();
+                writer.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
