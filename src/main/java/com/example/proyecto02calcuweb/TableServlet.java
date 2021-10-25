@@ -37,11 +37,12 @@ public class TableServlet extends HttpServlet {
         for (int j = 1; j < tableCSV.size(); j++) {
             table += "<tr>";
             for (int i = 0; i < tableCSV.get(j).size(); i++) {
-                table += "<td>"+ tableCSV.get(j).get(i) + "</td>";
+                table += "<td>" + tableCSV.get(j).get(i) + "</td>";
             }
             table += "</tr>";
         }
         table += "</table>";
+        table += "</html>";
         return table;
     }
 

@@ -6,6 +6,7 @@ import Expression_Tree.InfixToPosfix;
 import java.io.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
+import Save.SaveProblem;
 
 @WebServlet(name = "Obtener", value = "/obtener")
 public class Obtener_Datos extends HttpServlet {
@@ -19,6 +20,9 @@ public class Obtener_Datos extends HttpServlet {
 
         String posfix = InfixToPosfix.main(operacion);
         double resul = ExpressionTree.main(posfix);
+        String resultado = resul + "";
+
+        SaveProblem.main(operacion,resultado);
 
         System.out.println("operación recibida: " + operacion);
         System.out.println("posfix: " + posfix);
