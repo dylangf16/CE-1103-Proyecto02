@@ -11,6 +11,12 @@ import Save.*;
 public class TableServlet extends HttpServlet {
     private String message;
 
+    /**
+     * Genera la respuesta del servlet
+     * @param request solicitud del cliente
+     * @param response respuesta del servlet
+     * @throws IOException
+     */
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/html");
 
@@ -25,6 +31,12 @@ public class TableServlet extends HttpServlet {
         // return response
         writer.println(htmlRespone);
     }
+
+    /**
+     * Construye el html de la tabla de resultados
+     * @return String del html del codigo de la tabla
+     * @throws IOException
+     */
     public String buildTable() throws IOException {
         SaveProblem saveProblem = new SaveProblem();
         List<List<String>> tableCSV = saveProblem.readFile();

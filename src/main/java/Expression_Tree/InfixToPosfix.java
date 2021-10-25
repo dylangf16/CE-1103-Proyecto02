@@ -9,10 +9,11 @@ import java.util.Stack;
 
 public class InfixToPosfix {
 
-    // A utility function to return
-    // precedence of a given operator
-    // Higher returned value means
-    // higher precedence
+    /**
+     * Le asigna un valor a los caracteres para colocarlos en orden de importancia a la hora de resolver
+     * @param ch caracter al que le asgina valor
+     * @return valor del caracter
+     */
     static int Prec(char ch) {
         switch (ch) {
             case '+':
@@ -27,30 +28,25 @@ public class InfixToPosfix {
         return -1;
     }
 
-    // The main method that converts
-    // given infix expression
-    // to postfix expression.
+    /**
+     * Convierte la expresion de sufija a posfija
+     * @param exp expresion en notacion sufija
+     * @return expreson en notacion posfija
+     */
     static String infixToPostfix(String exp) {
-        // initializing empty String for result
         String result = new String("");
 
-        // initializing empty stack
         Stack<Character> stack = new Stack<>();
 
         for (int i = 0; i < exp.length(); ++i) {
             char c = exp.charAt(i);
 
-            // If the scanned character is an
-            // operand, add it to output.
             if (Character.isLetterOrDigit(c)) {
                 result += c;
-            } // If the scanned character is an '(',
-            // push it to the stack.
+            }
             else if (c == '(') {
                 stack.push(c);
-            } //  If the scanned character is an ')',
-            // pop and output from the stack
-            // until an '(' is encountered.
+            }
             else if (c == ')') {
                 while (!stack.isEmpty()
                         && stack.peek() != '(') {
@@ -58,7 +54,7 @@ public class InfixToPosfix {
                 }
 
                 stack.pop();
-            } else // an operator is encountered
+            } else
             {
                 while (!stack.isEmpty() && Prec(c)
                         <= Prec(stack.peek())) {
@@ -70,7 +66,6 @@ public class InfixToPosfix {
 
         }
 
-        // pop all the operators from the stack
         while (!stack.isEmpty()) {
             if (stack.peek() == '(') {
                 return "Invalid Expression";
@@ -80,7 +75,11 @@ public class InfixToPosfix {
         return result;
     }
 
-    // Driver method
+    /**
+     * Metodo main
+     * @param infix problema matematico en notacion sufija
+     * @return problema matematico en notacion posfija
+     */
     public static String main(String infix) {
         String exp = infix;
         System.out.println(exp);

@@ -11,16 +11,24 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-/**
- *
- * @author alero
- */
 public class SaveProblem {
 
+    /**
+     * Metodo main
+     * @param problem string del problema en notacion sufija
+     * @param result string del resultado del problema
+     * @throws IOException
+     */
     public static void main(String problem, String result) throws IOException {
         write(problem, result);
     }
 
+    /**
+     * Escribe en un archivo csv
+     * @param problem string del problema en notacion sufija
+     * @param result string del resultado del problema
+     * @throws IOException
+     */
     public static void write(String problem, String result) throws IOException {
         List<List<String>> records = readFile();
         try (PrintWriter writer = new PrintWriter("Table.csv")) {
@@ -51,6 +59,11 @@ public class SaveProblem {
         }
     }
 
+    /**
+     * Lee el contenido de un archivo csv y lo almacena en una matriz
+     * @return matriz con los datos del archivo csv
+     * @throws IOException
+     */
     public static List<List<String>> readFile() throws IOException {
         List<List<String>> records = new ArrayList<>();
         String[] values = null;
@@ -67,6 +80,9 @@ public class SaveProblem {
         return records;
     }
 
+    /**
+     * Crea un archivo csv
+     */
     private static void generateCsvFile() {
 
         FileWriter writer = null;

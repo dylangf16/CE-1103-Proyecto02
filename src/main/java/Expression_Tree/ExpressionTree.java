@@ -2,12 +2,15 @@ package Expression_Tree;
 
 import java.util.Stack;
 
-// Java program for expression tree
 class Node {
 
     char value;
     Node left, right;
 
+    /**
+     * Metodo constructor
+     * @param item caracter que almacena el nodo
+     */
     Node(char item) {
         value = item;
         left = right = null;
@@ -16,52 +19,48 @@ class Node {
 
 public class ExpressionTree {
 
-    // A utility function to check if 'c'
-    // is an operator
+    /**
+     * Reconoce si un caracter es un operando o no
+     * @param c el character que va a evaluar
+     * @return
+     */
     boolean isOperator(char c) {
         if (c == '+' || c == '-'
                 || c == '*' || c == '/'
-                || c == '^') {
+                || c == '%') {
             return true;
         }
         return false;
     }
 
-    // Returns root of constructed tree for given
-    // postfix expression
+    /**
+     * Construye el arbol a partir de la notacion posfija
+     * @param postfix lista de caracteres de la notacion posfija
+     * @return nodo raiz del arbol construido
+     */
     Node constructTree(char postfix[]) {
         Stack<Node> st = new Stack<Node>();
         Node t, t1, t2;
 
-        // Traverse through every character of
-        // input expression
         for (int i = 0; i < postfix.length; i++) {
 
-            // If operand, simply push into stack
             if (!isOperator(postfix[i])) {
                 t = new Node(postfix[i]);
                 st.push(t);
-            } else // operator
+            } else
             {
                 t = new Node(postfix[i]);
 
-                // Pop two top nodes
-                // Store top
-                t1 = st.pop();      // Remove top
+                t1 = st.pop();
                 t2 = st.pop();
 
-                //  make them children
                 t.right = t1;
                 t.left = t2;
 
-                // System.out.println(t1 + "" + t2);
-                // Add this subexpression to stack
                 st.push(t);
             }
         }
 
-        //  only element will be root of expression
-        // tree
         t = st.peek();
         st.pop();
 
@@ -69,12 +68,19 @@ public class ExpressionTree {
     }
 
     /**
-     * function to convert character to digit *
+     * Convierte un caracter a un digito
+     * @param ch caracter de un numero
+     * @return caracter convertido a numero
      */
     private int toDigit(char ch) {
         return ch - '0';
     }
 
+    /**
+     * Resuelve el problema matematico a partir del arbol utilizando recursividad
+     * @param ptr nodo raiz del arbol
+     * @return resultado tras resolver el problema
+     */
     public double evaluate(Node ptr) {
         if (ptr.left == null && ptr.right == null) {
             return toDigit(ptr.value);
@@ -108,6 +114,11 @@ public class ExpressionTree {
         }
     }
 
+    /**
+     * Metodo main
+     * @param problem problema matematico en notacion posfija
+     * @return resultado del problema recibido
+     */
     public static double main(String problem) {
 
         ExpressionTree et = new ExpressionTree();
