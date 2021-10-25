@@ -1,6 +1,7 @@
 package com.example.proyecto02calcuweb;
 
 import java.io.*;
+import java.util.List;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 
@@ -24,8 +25,7 @@ public class TableServlet extends HttpServlet {
         // return response
         writer.println(htmlRespone);
     }
-
-    public String buildTable(){
+    public String buildTable() throws IOException {
         SaveProblem saveProblem = new SaveProblem();
         List<List<String>> tableCSV = saveProblem.readFile();
         String table = "<table>";

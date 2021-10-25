@@ -42,6 +42,9 @@
                     <input type="text" name= "operacion" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
                     <input class="btn btn-primary" type="submit" value="Presiona para enviar!"/>
                 </form>
+                <form name="loginForm" method="post" action="tabla">
+                    <input class="btn btn-primary" type="submit" value="Presiona para enviar!"/>
+                </form>
             </div>
         </div>
     </div>

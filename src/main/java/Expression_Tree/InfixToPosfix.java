@@ -83,6 +83,7 @@ public class InfixToPosfix {
     // Driver method
     public static String main(String infix) {
         String exp = infix;
+        System.out.println(exp);
         return infixToPostfix(exp);
     }
 }
