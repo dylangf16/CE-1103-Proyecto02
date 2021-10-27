@@ -23,15 +23,12 @@ public class Obtener_Datos extends HttpServlet {
         // read form fields
         String operacion = request.getParameter("operacion");
 
-
-        String posfix = InfixToPosfix.main(operacion);
-        double resul = ExpressionTree.main(posfix);
+        double resul = InfixToPosfix.main(operacion);
         String resultado = resul + "";
 
         SaveProblem.main(operacion,resultado);
 
         System.out.println("operación recibida: " + operacion);
-        System.out.println("posfix: " + posfix);
         System.out.println("resultado de la operación: " + resul);
 
 

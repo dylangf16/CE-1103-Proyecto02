@@ -5,12 +5,16 @@
  */
 package Expression_Tree;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
 
 public class InfixToPosfix {
 
     /**
-     * Le asigna un valor a los caracteres para colocarlos en orden de importancia a la hora de resolver
+     * Le asigna un valor a los caracteres para colocarlos en orden de
+     * importancia a la hora de resolver
+     *
      * @param ch caracter al que le asgina valor
      * @return valor del caracter
      */
@@ -24,12 +28,38 @@ public class InfixToPosfix {
             case '/':
             case '%':
                 return 2;
+            case '(':
+            case ')':
+                return -2;
+
         }
         return -1;
     }
 
     /**
+     * Cuenta la cantidad de digitos de cada numero y lo guarda en una lista
+     * @param infix problema amtematico en notacion sufija
+     * @return lista con el numero de dititos de cada numero
+     */
+    static List<Integer> BuildList(String infix) {
+        List<Integer> numlist = new ArrayList<Integer>();
+        for (int i = 0; i < infix.length(); i++) {
+            int j = 1;
+            char c = infix.charAt(i);
+            if (Prec(c) == -1) {
+                while (Prec(infix.charAt(i + j)) == -1) {
+                    j++;
+                }
+                numlist.add(j);
+                i += j - 1;
+            }
+        }
+        return numlist;
+    }
+
+    /**
      * Convierte la expresion de sufija a posfija
+     *
      * @param exp expresion en notacion sufija
      * @return expreson en notacion posfija
      */
@@ -43,19 +73,16 @@ public class InfixToPosfix {
 
             if (Character.isLetterOrDigit(c)) {
                 result += c;
-            }
-            else if (c == '(') {
+            } else if (c == '(') {
                 stack.push(c);
-            }
-            else if (c == ')') {
+            } else if (c == ')') {
                 while (!stack.isEmpty()
                         && stack.peek() != '(') {
                     result += stack.pop();
                 }
 
                 stack.pop();
-            } else
-            {
+            } else {
                 while (!stack.isEmpty() && Prec(c)
                         <= Prec(stack.peek())) {
 
@@ -78,11 +105,11 @@ public class InfixToPosfix {
     /**
      * Metodo main
      * @param infix problema matematico en notacion sufija
-     * @return problema matematico en notacion posfija
+     * @return resultado de resolver el problema matematico
      */
-    public static String main(String infix) {
-        String exp = infix;
-        System.out.println(exp);
-        return infixToPostfix(exp);
+    public static double main(String infix) {
+        System.out.println(infix);
+        System.out.println(BuildList(infix));
+        return ExpressionTree.main(infixToPostfix(infix), BuildList(infix));
     }
 }

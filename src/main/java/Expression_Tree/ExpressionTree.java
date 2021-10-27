@@ -1,5 +1,6 @@
 package Expression_Tree;
 
+import java.util.List;
 import java.util.Stack;
 
 class Node {
@@ -34,29 +35,29 @@ public class ExpressionTree {
     }
 
     /**
-     * Construye el arbol a partir de la notacion posfija
-     * @param postfix lista de caracteres de la notacion posfija
-     * @return nodo raiz del arbol construido
+     * Construye el arbol inario a partir de la notacion posfija
+     * @param postfix notacion posfija del problema matematico
+     * @param list lista con el numero de diitos de cada numero
+     * @return raiz del arbol creado
      */
-    Node constructTree(char postfix[]) {
+    Node constructTree(char postfix[], List<Integer> list) {
         Stack<Node> st = new Stack<Node>();
         Node t, t1, t2;
+        int count = 0;
 
         for (int i = 0; i < postfix.length; i++) {
-            int j = 0;
 
             if (!isOperator(postfix[i])) {
+                int j = list.get(count);
                 String digits = Character.toString(postfix[i]);
-                while (!isOperator(postfix[i+j])) {
-                    j++;
+                for(int s = 1; s < j; s++){
+                    digits += Character.toString(postfix[i+s]);
                 }
-                    for(int s = 1; s <= j-i; s++){
-                        digits += Character.toString(postfix[i+s]);
-                    }
 
                 t = new Node(digits);
                 st.push(t);
-                i += j;
+                i += j - 1;
+                count++;
             } else
             {
                 t = new Node(Character.toString(postfix[i]));
@@ -68,6 +69,7 @@ public class ExpressionTree {
                 t.left = t2;
 
                 st.push(t);
+
             }
         }
 
@@ -126,15 +128,15 @@ public class ExpressionTree {
 
     /**
      * Metodo main
-     * @param problem problema matematico en notacion posfija
-     * @return resultado del problema recibido
+     * @param postfix problema matematico en ntoacion posfija
+     * @param list lista con la cantidad de digitos de cada numero
+     * @return resultado de resolver el problema matematico por medio del arbol
      */
-    public static double main(String problem) {
-
+    public static double main(String postfix, List<Integer> list) {
         ExpressionTree et = new ExpressionTree();
-        String postfix = problem;
         char[] charArray = postfix.toCharArray();
-        Node root = et.constructTree(charArray);
+        Node root = et.constructTree(charArray, list);
+        System.out.println(et.evaluate(root));
         return et.evaluate(root);
 
     }
