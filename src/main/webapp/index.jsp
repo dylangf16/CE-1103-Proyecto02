@@ -43,7 +43,7 @@
                     <input class="btn btn-primary" type="submit" value="Presiona para enviar!"/>
                 </form>
                 <form name="loginForm" method="post" action="tabla">
-                    <input class="btn btn-primary" type="submit" value="Presiona para enviar!"/>
+                    <input class="btn btn-primary" type="submit" value="Presiona para revisar el historial!"/>
                 </form>
             </div>
         </div>
