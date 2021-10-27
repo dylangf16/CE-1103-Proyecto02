@@ -4,14 +4,14 @@ import java.util.Stack;
 
 class Node {
 
-    char value;
+    String value;
     Node left, right;
 
     /**
      * Metodo constructor
-     * @param item caracter que almacena el nodo
+     * @param item String que almacena el nodo
      */
-    Node(char item) {
+    Node(String item) {
         value = item;
         left = right = null;
     }
@@ -43,13 +43,23 @@ public class ExpressionTree {
         Node t, t1, t2;
 
         for (int i = 0; i < postfix.length; i++) {
+            int j = 0;
 
             if (!isOperator(postfix[i])) {
-                t = new Node(postfix[i]);
+                String digits = Character.toString(postfix[i]);
+                while (!isOperator(postfix[i+j])) {
+                    j++;
+                }
+                    for(int s = 1; s <= j-i; s++){
+                        digits += Character.toString(postfix[i+s]);
+                    }
+
+                t = new Node(digits);
                 st.push(t);
+                i += j;
             } else
             {
-                t = new Node(postfix[i]);
+                t = new Node(Character.toString(postfix[i]));
 
                 t1 = st.pop();
                 t2 = st.pop();
@@ -68,12 +78,12 @@ public class ExpressionTree {
     }
 
     /**
-     * Convierte un caracter a un digito
+     * Convierte un string a un digito
      * @param ch caracter de un numero
      * @return caracter convertido a numero
      */
-    private int toDigit(char ch) {
-        return ch - '0';
+    private int toDigit(String ch) {
+        return Integer.parseInt(ch);
     }
 
     /**
@@ -88,22 +98,22 @@ public class ExpressionTree {
             double result = 0.0;
             double left = evaluate(ptr.left);
             double right = evaluate(ptr.right);
-            char operator = ptr.value;
+            String operator = ptr.value;
 
             switch (operator) {
-                case '+':
+                case "+":
                     result = left + right;
                     break;
-                case '-':
+                case "-":
                     result = left - right;
                     break;
-                case '*':
+                case "*":
                     result = left * right;
                     break;
-                case '/':
+                case "/":
                     result = left / right;
                     break;
-                case '%':
+                case "%":
                     result = left % right;
                     break;
                 default:
