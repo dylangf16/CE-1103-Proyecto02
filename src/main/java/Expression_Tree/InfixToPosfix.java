@@ -47,14 +47,22 @@ public class InfixToPosfix {
             int j = 1;
             char c = infix.charAt(i);
             if (Prec(c) == -1) {
-                while (Prec(infix.charAt(i + j)) == -1) {
-                    j++;
+                if (i + j < infix.length()) {
+                    while (Prec(infix.charAt(i + j)) == -1) {
+                        if (i + j + 1 < infix.length()) {
+                            j++;
+                        }else{
+                            j++;
+                            break;
+                        }
+                    }
                 }
+
                 numlist.add(j);
                 i += j - 1;
             }
         }
-        return numlist;
+        return numlist ;
     }
 
     /**
